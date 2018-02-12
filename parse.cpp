@@ -23,7 +23,7 @@ int main()
 	while(cin >> word)
 	{
 		input.push_back(word); 		//We get the input and hold it in the vector
-	}
+	} //Weep
 	
 	cout << input.size() << endl;  	//Print size because the first thing is the size
     
