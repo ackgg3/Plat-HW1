@@ -44,7 +44,38 @@ bool isInt(string word)
 
 bool isDec(string word)
 {
-return false;
+
+  char c;
+  int state = 0;
+  for(int i = 0; i < word.length(); i++)
+  {
+    c = word[i];
+    switch(state)
+    {
+      case 0:
+        if      (c == '+' || c == '-')  {state = 1;}
+        else if (c >= '0' && c <= '9')  {state = 2;}
+        else                            {return false;}
+        break;
+      case 1:
+        if      (c >= '0' && c <= '9')  {state = 2;}
+        else                            {return false;}
+        break;
+      case 2:
+        if      (c >= '0' && c <= '9')  {state = 2;}
+        else if (c == '.')              {state = 3;}
+        else                            {return false;}
+       break;
+      case 3:
+        if      (c >= '0' && c <= '9')  {state = 4;}
+        else                            {return false;}
+      case 4:
+        if      (c >= '0' && c <= '9')  {state = 4;}
+        else                            {return false;}
+    }
+  }
+  if(state == 4)  {return true;}
+  else            {return false;}
 }
 
 bool isSci(string word)
