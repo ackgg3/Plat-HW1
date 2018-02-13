@@ -44,7 +44,6 @@ bool isInt(string word)
 
 bool isDec(string word)
 {
-
   char c;
   int state = 0;
   for(int i = 0; i < word.length(); i++)
@@ -69,9 +68,11 @@ bool isDec(string word)
       case 3:
         if      (c >= '0' && c <= '9')  {state = 4;}
         else                            {return false;}
+        break;
       case 4:
         if      (c >= '0' && c <= '9')  {state = 4;}
         else                            {return false;}
+        break;
     }
   }
   if(state == 4)  {return true;}
@@ -80,7 +81,53 @@ bool isDec(string word)
 
 bool isSci(string word)
 {
-return false;
+  char c;
+  int state = 0;
+  for(int i = 0; i < word.length(); i++)
+  {
+    c = word[i];
+    switch(state)
+    {
+      case 0:
+        if      (c == '+' || c == '-')  {state = 1;}
+        else if (c >= '0' && c <= '9')  {state = 2;}
+        else                            {return false;}
+        break;
+      case 1:
+        if      (c >= '0' && c <= '9')  {state = 2;}
+        else                            {return false;}
+        break;
+      case 2:
+        if      (c >= '0' && c <= '9')  {state = 2;}
+        else if (c == '.')              {state = 3;}
+        else                            {return false;}
+       break;
+      case 3:
+        if      (c >= '0' && c <= '9')  {state = 4;}
+        else                            {return false;}
+        break;
+      case 4:
+        if      (c >= '0' && c <= '9')  {state = 4;}
+        else if (c == 'E')              {state = 5;}
+        else                            {return false;}
+        break;
+      case 5:
+        if      (c == '-')              {state = 6;}
+        else if (c >= '0' && c <= '9')  {state = 7;}
+        else                            {return false;}
+        break;
+      case 6:
+        if      (c >= '0' && c <= '9')  {state = 7;}
+        else                            {return false;}
+        break;
+      case 7:
+        if      (c >= '0' && c <= '9')  {state = 7;}
+        else                            {return false;}
+        break;
+    }
+  }
+  if(state == 7)  {return true;}
+  else            {return false;}
 }
 
 bool isHex(string word)
@@ -128,8 +175,8 @@ int main()
         word = input.front(); //Get the next word
         if      (isInt(word)) {result = ING;}
         else if (isDec(word)) {result = DEC;}
-        else if (isSci(word)) {result = HEX;}
-        else if (isHex(word)) {result = SCI;}
+        else if (isSci(word)) {result = SCI;}
+        else if (isHex(word)) {result = HEX;}
         else if (isPhn(word)) {result = PHN;}
         else if (isKey(word)) {result = IDT;}
         else if (isIdt(word)) {result = KEY;}
