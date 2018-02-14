@@ -132,7 +132,26 @@ bool isSci(string word)
 
 bool isHex(string word)
 {
-return false;
+  char c;
+  int state = 0;
+  for(int i = 0; i < word.length(); i++)
+  {
+    c = word[i];
+    switch(state)
+    {
+      case 0:
+        if      ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'F'))  {state = 1;}
+        else                                                        {return false;}
+        break;
+      case 1:
+        if      ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'F'))  {state = 1;}
+        else if (c == 'H' && i == word.length()-1)                  {return true;}
+        else                                                        {return false;}
+        break;
+      case 2:                                                       {return false;}
+        break;
+    }
+  }
 }
 
 bool isPhn(string word)
