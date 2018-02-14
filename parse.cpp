@@ -1,3 +1,6 @@
+//Avery Klingbeil 
+//Homework 1 
+//Program languages and Translators
 #include <iostream>
 #include <string>
 #include <vector>
