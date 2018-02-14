@@ -24,22 +24,22 @@ bool isInt(string word)
     switch(state)
     {
       case 0:
-      if      (c == '+' || c == '-') {state = 1;}
-      else if (c >= '0' && c <= '9') {state = 2;}
-      else                           {return false;}
+      if      (c == '+' || c == '-')  {state = 1;}
+      else if (c >= '0' && c <= '9')  {state = 2;}
+      else                            {return false;}
       break;
       case 1:
-      if (c >= '0' && c <= '9') {state = 2;}
-      else                      {return false;}
+      if (c >= '0' && c <= '9')       {state = 2;}
+      else                            {return false;}
       break;
       case 2:
-      if (c >= '0' && c <= '9') {state = 2;}
-      else                      {return false;}
+      if (c >= '0' && c <= '9')       {state = 2;}
+      else                            {return false;}
       break;
     }
   }
-  if(state == 2)  {return true;}
-  else            {return false;}
+  if(state == 2)                      {return true;}
+  else                                {return false;}
 }
 
 bool isDec(string word)
@@ -75,8 +75,8 @@ bool isDec(string word)
       break;
     }
   }
-  if(state == 4)  {return true;}
-  else            {return false;}
+  if(state == 4)                      {return true;}
+  else                                {return false;}
 }
 
 bool isSci(string word)
@@ -140,13 +140,15 @@ bool isHex(string word)
     switch(state)
     {
       case 0:
-      if      ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'F'))  {state = 1;}
-      else                                                        {return false;}
+      if      ((c >= '0' && c <= '9') 
+              || (c >= 'A' && c <= 'F'))          {state = 1;}
+      else                                        {return false;}
       break;
       case 1:
-      if      ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'F'))  {state = 1;}
-      else if (c == 'H' && i == word.length()-1)                  {return true;}
-      else                                                        {return false;}
+      if      ((c >= '0' && c <= '9') 
+              || (c >= 'A' && c <= 'F'))          {state = 1;}
+      else if (c == 'H' && i == word.length()-1)  {return true;}
+      else                                        {return false;}
       break;
     }
   }
@@ -154,8 +156,16 @@ bool isHex(string word)
 
 bool isPhn(string word)
 {
+  //Here's the Hatchet O' Hacking
+  //Because there's some stupid hacks ahead
+  //  /'-./\_
+  // :HACK||,>
+  //  \.-'||
+  //      ||
+  //      ||
+  //      ||
   char c;
-  bool paren = 0;
+  bool paren = 0; //Awful hack because I'm lazy. it works though.
   int state = 0;
   for(int i = 0; i < word.length(); i++)
   {
@@ -254,7 +264,7 @@ bool isPhn(string word)
       break;
     }                              
   }
-  if(state == 21 && paren)                     {return true;}
+  if(state == 21 && paren)            {return true;}
   else  {return false;} 
 }
 
@@ -277,16 +287,20 @@ bool isIdt(string word)
     switch(state)
     {
       case 0:
-      if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')) {state = 1;}
-      else  {return false;}
+      if      ((c >= 'a' && c <= 'z') 
+              || (c >= 'A' && c <= 'Z'))    {state = 1;}
+      else                                  {return false;}
       break;
       case 1:
-      if (c == '_' || (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9')) {state = 1;}
-      else {return false;}
+      if      (c == '_' 
+              || (c >= 'a' && c <= 'z') 
+              || (c >= 'A' && c <= 'Z') 
+              || (c >= '0' && c <= '9'))    {state = 1;}
+      else                                  {return false;}
     }
   }
-  if(state == 1)  {return true;}
-  else            {return false;}
+  if(state == 1)                            {return true;}
+  else                                      {return false;}
 }
 
 int main()
@@ -299,7 +313,8 @@ int main()
   string word = "";
   string result = "";
   cin >> t;
-  //while(cin >> word)
+  //while(cin >> word) I was going to be clever then realized theres confined
+  //                   input for this assignment 
   for(int i = 0; i < t; i++)
   {
         cin >> word;
@@ -316,14 +331,14 @@ int main()
   while(input.size() > 0)
   {
     word = input.front(); //Get the next word
-    if      (isInt(word)) {result = ING;}
-    else if (isDec(word)) {result = DEC;}
-    else if (isSci(word)) {result = SCI;}
-    else if (isHex(word)) {result = HEX;}
-    else if (isPhn(word)) {result = PHN;}
-    else if (isKey(word)) {result = KEY;}
-    else if (isIdt(word)) {result = IDT;}
-    else                  {result = ERR;}
+    if      (isInt(word)) {result = ING;} //          ,--.!,
+    else if (isDec(word)) {result = DEC;} //       __/   -*-
+    else if (isSci(word)) {result = SCI;} //     ,d08b.  '|`
+    else if (isHex(word)) {result = HEX;} //     0088MM     
+    else if (isPhn(word)) {result = PHN;} //     `9MMP'     
+    else if (isKey(word)) {result = KEY;} //
+    else if (isIdt(word)) {result = IDT;} //
+    else                  {result = ERR;} //
     output.push_back(result); //record result
     input.erase(input.begin()); //we don't need that word any more
   }
