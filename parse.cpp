@@ -148,25 +148,134 @@ bool isHex(string word)
         else if (c == 'H' && i == word.length()-1)                  {return true;}
         else                                                        {return false;}
         break;
-      case 2:                                                       {return false;}
-        break;
     }
   }
 }
 
 bool isPhn(string word)
 {
-return false;
+  char c;
+  int state = 0;
+  for(int i = 0; i < word.length(); i++)
+  {
+    c = word[i];
+    switch(state)
+    {
+      case 0:
+        if      (c == '(')              {state = 1;}
+        else if (c >= '0' && c <= '9')  {state = 6;}
+        else                            {return false;}
+        break;
+      case 1:
+        if      (c >= '0' && c <= '9')  {state = 2;}
+        else                            {return false;}
+        break;
+      case 2:
+        if      (c >= '0' && c <= '9')  {state = 3;}
+        else                            {return false;}
+        break;
+      case 3:
+        if      (c >= '0' && c <= '9')  {state = 4;}
+        else                            {return false;}
+        break;
+      case 4:
+        if      (c == ')')              {state = 5;}
+        else                            {return false;}
+        break;
+      case 5:
+        if      (c >= '0' && c <= '9')  {state = 10;}
+        else                            {return false;}
+        break;
+      case 6:
+        if      (c >= '0' && c <= '9')  {state = 7;}
+        else                            {return false;}
+        break;
+      case 7:
+        if      (c >= '0' && c <= '9')  {state = 8;}
+        else                            {return false;}
+        break;
+      case 8:
+        if      (c == '-')              {state = 9;}
+        else if (c == '.')              {state = 15;}
+        else                            {return false;}
+        break;
+      case 9:
+        if      (c >= '0' && c <= '9')  {state = 10;}
+        else                            {return false;}
+        break;
+      case 10:
+        if      (c >= '0' && c <= '9')  {state = 11;}
+        else                            {return false;}
+        break;
+      case 11:
+        if      (c >= '0' && c <= '9')  {state = 12;}
+        else                            {return false;}
+        break;
+      case 12:
+        if      (c == '-')              {state = 13;}
+        else                            {return false;}
+        break;
+      case 13:
+        if      (c >= '0' && c <= '9')  {state = 14;}
+        else                            {return false;}
+        break;
+      case 14:
+        if      (c >= '0' && c <= '9')  {state = 19;}
+        else                            {return false;}
+        break;
+      case 15:
+        if      (c >= '0' && c <= '9')  {state = 16;}
+        else                            {return false;}
+        break;
+      case 16:
+        if      (c >= '0' && c <= '9')  {state = 17;}
+        else                            {return false;}
+        break;
+      case 17:
+        if      (c >= '0' && c <= '9')  {state = 18;}
+        else                            {return false;}
+        break;
+      case 18:
+        if      (c == '.')              {state = 14;}
+        else                            {return false;}
+        break;
+      case 19:
+        if      (c >= '0' && c <= '9')  {state = 20;}
+        else                            {return false;}
+        break;
+      case 20:
+        if      (c >= '0' && c <= '9')  {return true;}
+        else                            {return false;}
+        break;
+      case 21:
+        break;
+    }
+  }
 }
 
 bool isKey(string word)
 {
-return false;
+  if      (word == "while") {return true;}
+  else if (word == "else")  {return true;}
+  else if (word == "if")    {return true;}
+  else if (word == "print") {return true;}
+  else                      {return false;}
 }
 
 bool isIdt(string word)
 {
-return false;
+  char c;
+  int state = 0;
+  for(int i = 0; i < word.length(); i++)
+  {
+    c = word[i];
+    switch(state)
+    {
+      
+    }
+  }
+  if(state == 7)  {return true;}
+  else            {return false;}
 }
 
 int main()
